@@ -1,6 +1,6 @@
 // Reverse vending machine concept for PET bottle collection
 // Units: millimetres. Front is the negative Y face; floor is Z=0.
-// Open in OpenSCAD, adjust the parameters, and export STL for Autodesk Fusion.
+// Open in OpenSCAD to edit the concept. Use the color 3MF for Fusion; STL is monochrome.
 $fn = 48;
 
 machine_width = 760;
@@ -18,6 +18,44 @@ module front_cylinder(x,y,z,r,h,c) {
     color(c) translate([x,y,z]) rotate([90,0,0]) cylinder(r=r,h=h,center=true);
 }
 
+
+// QR payload is the demo machine identifier LW-024. The live app/backend URL
+// can replace this payload when a hosted pairing service is available.
+qr_rows = [
+    "111111100010101111111",
+    "100000100000101000001",
+    "101110101010001011101",
+    "101110100000101011101",
+    "101110100101101011101",
+    "100000100111001000001",
+    "111111101010101111111",
+    "000000001010000000000",
+    "111011111010111000100",
+    "001000000001010100000",
+    "011000111111011101011",
+    "100010010001110111010",
+    "111111110101011100010",
+    "000000001110001100110",
+    "111111101100100011111",
+    "100000101100001101011",
+    "101110101010101111011",
+    "101110100111010011010",
+    "101110101111011010101",
+    "100000101101110111010",
+    "111111101011011011011"
+];
+module qr_badge() {
+    block(-200,-360,1105,148,20,164,accent_color);
+    block(-200,-372,1105,116,4,116,[1,1,1]);
+    for (r=[0:20], c=[0:20]) {
+        if (qr_rows[r][c] == "1")
+            block(-200-42+c*4,-376,1105+42-r*4,4,2.96,4,dark_color);
+    }
+    block(-200,-372,1032,132,6,13,[0.94,0.97,0.93]);
+    color([0.04,0.18,0.13]) translate([-200,-378,1028]) rotate([90,0,0])
+        linear_extrude(height=1) text("SCAN TO CONNECT", size=7, halign="center");
+}
+
 // Main cabinet and kick plate
 block(0,0,925, machine_width,machine_depth,1750, case_color);
 block(0,-12,55, machine_width+20,machine_depth+10,110, accent_color);
@@ -26,6 +64,7 @@ block(0,-4,1805, machine_width+12,machine_depth+14,90, accent_color);
 block(0,-358,1802, 390,12,54, [0.96,0.98,0.96]);
 // Brand badge and PET return wording as a clear raised marker
 block(-8,-366,1802, 14,5,30, accent_color);
+qr_badge();
 
 // User interface: screen, bezel, and three tactile controls
 block(-205,-354,1455, 270,24,205, dark_color);

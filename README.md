@@ -16,3 +16,7 @@ The CU, GS25, and MGL directory is generated from `cu_mongolia_642_branch_locati
 
 
 For the colored Fusion model, insert `RVM25_reverse_vending_machine_color.3mf`. The older STL file is monochrome. See `RVM25_model_notes.md` for model and QR details.
+
+## Bottle return simulation
+
+Open `simulation.html` to play the illustrative QR pairing → bottle check → compaction → collection → demo points sequence. It is a scripted concept cutaway; the internal conveyor, sensor, and compactor are not physically modeled in the Fusion assembly.

@@ -1,6 +1,6 @@
-# Loopwise admin prototype
+# XOT17 admin prototype
 
-Run the Loopwise local preview server from this folder:
+Run the XOT17 local preview server from this folder:
 
 ```sh
 python3 server.py

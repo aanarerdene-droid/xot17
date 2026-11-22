@@ -1,4 +1,4 @@
-"""Local Loopwise demo server with a shared support-request inbox."""
+"""Local XOT17 demo server with a shared support-request inbox."""
 from __future__ import annotations
 
 import json
@@ -23,7 +23,7 @@ def read_requests() -> list[dict]:
         return []
 
 
-class LoopwiseHandler(SimpleHTTPRequestHandler):
+class XOT17Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
@@ -86,14 +86,14 @@ class LoopwiseHandler(SimpleHTTPRequestHandler):
 
 def main() -> None:
     address = ("127.0.0.1", 8000)
-    server = ThreadingHTTPServer(address, LoopwiseHandler)
-    print(f"Loopwise preview: http://localhost:{address[1]}/")
+    server = ThreadingHTTPServer(address, XOT17Handler)
+    print(f"XOT17 preview: http://localhost:{address[1]}/")
     print("Local request inbox API: http://localhost:8000/api/requests")
     print("Press Ctrl+C to stop.")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\nStopping Loopwise preview.")
+        print("\nStopping XOT17 preview.")
     finally:
         server.server_close()
 
